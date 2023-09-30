@@ -1,50 +1,32 @@
-let mediaStream = null;
-let mediaRecorder = null;
-let chunks = [];
+document.addEventListener("DOMContentLoaded", () => {
+    // GET THE SELECTORS OF THE BUTTONS
+    const startVideoButton = document.querySelector("button#startRecordingButton")
+    const stopVideoButton = document.querySelector("button#stopRecordingButton")
 
-document.getElementById('startRecordingButton').addEventListener('click', startRecordingButton);
-document.getElementById('stopRecordingButton').addEventListener('click', stopRecordingButton);
+    // adding event listeners
 
-async function startRecordingButton() {
-    try {
-        const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-        mediaStream = stream;
-        mediaRecorder = new MediaRecorder(stream);
-        mediaRecorder.ondataavailable = handleDataAvailable;
-        mediaRecorder.start();
+    startVideoButton.addEventListener("click", () => {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, { action: "request_recording" }, function (response) {
+                if (!chrome.runtime.lastError) {
+                    console.log(response)
+                } else {
+                    console.log(chrome.runtime.lastError, 'error line 14')
+                }
+            })
+        })
+    })
 
 
-        document.getElementById('startRecordingButton').disabled = true;
-        document.getElementById('stopRecordingButton').disabled = false;
-    } catch (error) {
-        console.error('Error starting recording:', error);
-    }
-}
-
-function handleDataAvailable(event) {
-    if (event.data.size > 0) {
-        chunks.push(event.data);
-    }
-}
-
-function stopRecordingButton() {
-    if (mediaRecorder) {
-        mediaRecorder.stop();
-        mediaStream.getTracks().forEach(track => track.stop());
-        const blob = new Blob(chunks, { type: 'video/webm' });
-
-        // Create a temporary download link for the user to save the recording
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'screen_recording.webm';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-        chunks = [];
-        document.getElementById('startRecordingButton').disabled = false;
-        document.getElementById('stopRecordingButton').disabled = true;
-    }
-}
-
+    stopVideoButton.addEventListener("click", () => {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, { action: "stopvideo" }, function (response) {
+                if (!chrome.runtime.lastError) {
+                    console.log(response)
+                } else {
+                    console.log(chrome.runtime.lastError, 'error line 27')
+                }
+            })
+        })
+    })
+})
