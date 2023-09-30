@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "Screen Recorder Extension",
+    "description": "Record and share your screen with this extension",
+    "icons": {
+        "128": "icon.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+
+    "action": {
+        "default_popup": "index.html",
+        "default_icons": {
+            "16": "icon.png",
+            "32": "icon.png",
+            "128": "icon.png"
+        }
+    },
+
+    "host_permissions": [
+        "http://*/",
+        "https://*/*"
+    ],
+
+    "permissions": [
+        "scripting",
+        "tabs",
+        "activeTab",
+        "desktopCapture"
+    ],
+    "version": "1.0.0"
+}

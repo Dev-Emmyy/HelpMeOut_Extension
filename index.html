@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extension Popup</title>
+    <!-- Include any CSS or stylesheets you need -->
+    <link rel="stylesheet" href="./popup.css">
+</head>
+
+<body>
+    <div class="popout">
+        <div class="popout-header">
+            <div class="popout-header-contents">
+                <img src="./logo_1.svg" alt="">
+                <img src="./HelpMeOut.svg" alt="">
+            </div>
+            <div class="popout-header-contents">
+                <img src="./setting-2.svg" alt="">
+                <img src="./close-circle.svg" alt="">
+            </div>
+        </div>
+        <div class="popout-body">
+            <div class="popout-description">
+                <img src="./This extension helps you record and share help videos with ease..svg" alt="">
+            </div>
+            <div class="popout-screen">
+                <img src="./screen.png" alt="">
+                <img src="./tab.png" alt="">
+            </div>
+            <div class="popout-controls">
+                <div class="popout-controls-description">
+                    <div class="popout-controls-description-2">
+                        <img src="./video-camera.svg" alt="">
+                        <p>Camera</p>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="toggleCamera" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="popout-controls-description">
+                    <div class="popout-controls-description-2">
+                        <img src="./microphone.svg" alt="">
+                        <p>Audio</p>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="toggleAudio" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="popout-button">
+                <button id="startRecordingButton">Start Recording</button>
+            </div>
+            <div class="popout-button2">
+                <button id="stopRecordingButton">Stop Recording</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./popup.js"></script>
+    
+</body>
+
+</html>
